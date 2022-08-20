@@ -13,14 +13,14 @@
     "errorhandler": "^1.5.1",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
-    "mongoose": "^6.4.4",
+    "mongoose": "^6.5.2",
     "morgan": "^1.10.0",
     "node-notifier": "^10.0.1",
+    "nth-check": ">=2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "nth-check": ">=2.0.1"
+    "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "jest": "^28.1.2",
