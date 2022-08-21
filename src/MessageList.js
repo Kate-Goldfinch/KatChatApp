@@ -1,67 +1,52 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
+import MessageItem from './MessageItem'
 import apiService from './api/services'
 import './Chat.css'
-import { UserContext } from './UserContext'
 
-const ConversationDetails = ({selectedConversation, conversationContent, updateConversation}) => {
+
+const MessageList = ({activeConversation, conversationContent, updateConversation}) => {
     const [newMessage, setNewMessage] = useState('')
-    const {user} = useContext(UserContext)
 
     if(!conversationContent) return null
 
     const handleNewMessageChange = (e)=> setNewMessage(e.target.value)
 
-    const submitMessage = (e)=>{
+    const handleSubmitMessage = (e)=>{
         e.preventDefault()
-        apiService.submitMessage(selectedConversation.id, {text: newMessage})
+        apiService.submitMessage(activeConversation.id, {text: newMessage})
         .then(response =>{
             if(response.status === "success"){
-                updateConversation(selectedConversation)
+                updateConversation(activeConversation)
+            }
+        })
+    }
+    const handleDeleteMessage = (message)=>{
+        apiService.deleteMessage(activeConversation.id, message)
+        .then(response =>{
+            if(response.status === "success"){
+                updateConversation(activeConversation)
             }
         })
     }
 
-    const deleteMessage = (message)=>{
-        apiService.deleteMessage(selectedConversation.id, message)
-        .then(response =>{
-            if(response.status === "success"){
-                updateConversation(selectedConversation)
-            }
+        const renderedList = conversationContent.map((message) => {
+            return <MessageItem 
+                    key={message.id} 
+                    message = {message}
+                    handleDeleteMessage = {handleDeleteMessage}
+                    />
         })
-    }
-
-    const renderedList = conversationContent.map((message) => {
-        let newDate = new Date(message.timestamp).toString().slice(0,24)
-        
-        if(user.username === message.creator){
-            return <div className = 'user-message'
-            key={message.id}>
-            <div className='username'>{message.creator}</div>
-            <div className = 'message'>{message.text}</div>
-            <div className = 'timestamp'>{newDate}</div>
-            <button onClick={() => deleteMessage(message.id)}>X</button>
-        </div>
-        } else{
-            return  <div className = 'other-message'
-                        key={message.id}>
-                        <div className='username'>{message.creator}</div>
-                        <div className = 'message'>{message.text}</div>
-                        <div className = 'timestamp'>{newDate}</div>
-                    </div>
-            }
-        })
-       
-
+    
     return <div className="container">
                 <div className="side">
                     <p className="title">Conversations</p>
-                    <div id="side-nav">
+                    {/* <div id="side-nav">
                         <p id="loading-msg">Loading conversations...</p>
-                    </div>
+                    </div> */}
                 </div>
                 <div id="chat-area" className="main">
                     <div id="chat-nav">
-                        <p id="chat-title" className="title">{selectedConversation.title}</p>
+                        <p id="chat-title" className="title">{activeConversation.title}</p>
                         {/* <button id="invite-button" className="chat-button">
                             Invite Friend
                         </button>
@@ -76,7 +61,7 @@ const ConversationDetails = ({selectedConversation, conversationContent, updateC
                         {renderedList}
                     </div>
                     <form id="message-input"
-                    onSubmit={submitMessage}>
+                    onSubmit={handleSubmitMessage}>
                         <textarea id="chat-message" 
                                 name="chat-message"
                                 value={newMessage}
@@ -90,4 +75,4 @@ const ConversationDetails = ({selectedConversation, conversationContent, updateC
             </div>
 }
 
-export default ConversationDetails
+export default MessageList

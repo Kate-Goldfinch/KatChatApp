@@ -20,6 +20,11 @@ const getConversations = () =>{
     return request.then(response => response.data)
 }
 
+const submitConversation = (title) =>{
+    const request = axios.post(`${baseURL}api/conversations/`, title)
+    return request.then(response=> response.data)
+}
+
 const getConversationDetails = id =>{
     const request = axios.get(`${baseURL}api/conversations/${id}`)
     return request.then(response => response.data)
@@ -40,6 +45,7 @@ export default {
     getUser,
     signIn,
     getConversations,
+    submitConversation,
     getConversationDetails,
     submitMessage,
     deleteMessage

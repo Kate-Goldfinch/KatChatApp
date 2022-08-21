@@ -28,11 +28,32 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.conversation-card{
+  padding: 2em;
+  width: 10%;
+  height: 10%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black
+}
+
+.icon-box{
+  position:relative;
+  width: 40px;
+}
+
+.icon{
+  position: absolute;
+  height:40px;
+  width:40px;
+  top: -5px;
+  left:0;
+  z-index: 2;
+}
+
+.icon-text{
+ margin:auto;
+z-index: 1;
 }

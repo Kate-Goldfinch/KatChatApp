@@ -1,11 +1,18 @@
 import React from 'react'
+import { FiMessageSquare } from "react-icons/fi";
+import './App.css';
 
 const ConversationItem = ({conversation, onConversationSelect}) => {
     
   return (
-    <div onClick = {()=> {onConversationSelect(conversation)}}>
+    <div className='conversation-card'
+        onClick = {()=> {onConversationSelect(conversation)}}>
         <p>{conversation.title}</p>
-        <p>{conversation.messages}</p>
+        <div className='icon-box'>
+            <FiMessageSquare className='icon'/>
+            <span className='icon-text'>{conversation.messages}</span>
+        </div>
+       
     </div>
   )
 }
