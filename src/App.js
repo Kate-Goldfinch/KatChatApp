@@ -4,78 +4,60 @@ import apiService from './api/services'
 import ConversationList from './ConversationList';
 import ConversationDetails from './ConversationDetails';
 import './App.css';
+import { UserContext } from './UserContext';
+import SignIn from './SignIn';
 
 
 function App() {
 
-  const [newUserName, setNewUserName] = useState('')
   const [user, setUser] = useState('')
+
   const [conversations, setConversations] = useState([])
 
   const [loggedIn, setLoggedIn] = useState(false)
 
-  const [conversationDetails, setConversationDetails] = useState(null)
+  const [selectedConversation, setSelectedConversation] = useState(null)
+  const [conversationContent, setConversationContent] = useState(null)
 
 
 useEffect(() => {
   
   user && apiService.getConversations()
             .then(response =>{
-              setConversations(...conversations,response.conversations)
-              console.log(conversations)
+              setConversations(response.conversations)
               setLoggedIn(true)
             })
 }, [user])
 
-const signIn = (e)=>{
-  e.preventDefault()
-  const newObject = {
-  username: newUserName
-  }
-  // apiService
-  //   .signIn(newObject)
-  //   .then(response =>{
-  //     console.log(response)
-  //     if(response.status !== "username taken"){
-        // apiService.getUser(response.token)
-        // setUser(response.username)
-        apiService.getUser('62f7740c6c017917269ca417')
-        setUser('test')
-      // }
-      // })
-}
 
 const selectConversation = (conversation) => {
-  console.log(conversation)
-    apiService.getConversationDetails(conversation.id)
+  setSelectedConversation(conversation)
+  apiService.getConversationDetails(conversation.id)
     .then(response =>{
-      console.log(response)
-      setConversationDetails(response.messages) 
+      setConversationContent(response.messages) 
     })
    
   }
 
-const handleUserNameChange = (e)=> setNewUserName(e.target.value)
+
 
   return (
     <div className="App">
-
-      <Header user={user}/>
-      <form onSubmit={signIn}>
-        <input 
-          value={newUserName}
-          onChange={handleUserNameChange}
-          placeholder='Username'/>
-        <button type="submit">Sign In</button>
-      </form>
-      {loggedIn && 
-        !conversationDetails && 
+      <UserContext.Provider value={{user, setUser}}>
+        <Header/>
+        <SignIn/>
+        {loggedIn && !conversationContent && 
         <ConversationList 
             conversations={conversations}
-            onConversationSelect = {(c)=> {selectConversation(c)}}
-      />}
+            onConversationSelect = {(conv)=> {selectConversation(conv)}}
+        />}
 
-      <ConversationDetails conversation={conversationDetails} />
+        <ConversationDetails 
+          selectedConversation = {selectedConversation}
+          conversationContent={conversationContent} 
+          updateConversation = {(conv)=> {selectConversation(conv)}}
+        />
+      </UserContext.Provider>
     </div>
   );
 }

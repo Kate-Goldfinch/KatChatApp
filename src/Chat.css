@@ -1,0 +1,119 @@
+#side-nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#messages {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    overflow-y: auto;
+}
+
+#message-input {
+    background: white;
+    min-height: 10vh;
+    border-top: 1px solid lightgrey;
+    display: flex;
+    padding: 1em;
+    align-items: stretch;
+}
+
+#message-input textarea {
+    border: 1px solid lightgrey;
+    flex-grow: 1;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    padding: .4em;
+    font-size: 1em;
+}
+
+.conversation {
+    background: white;
+    border: none;
+    text-align: left;
+    padding-left: 2em;
+    border-bottom: .5px solid #E9ECEF;
+}
+
+.conversation:hover {
+    background: #212529;
+    color: white;
+}
+
+.main {
+    width: 70vw;
+    background-size: 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin: 0;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+    padding: .5em .5em .5em .7em;
+    font-weight: normal;
+}
+
+.chat-button {
+    border: 1px solid lightgrey;
+    background: white;
+    border-radius: 5px;
+    margin: .5em;
+    padding: .4em 1em;
+}
+
+.chat-button:hover:enabled {
+    border: none;
+    background: #212529;
+    color: white;
+}
+
+.user-message, .other-message {
+    display: flex;
+    margin: .5em;
+    flex-direction: column;
+}
+
+.user-message {
+    align-items: flex-end;
+}
+
+.user-message .message {
+    background: #495057;
+    color: white;
+}
+
+.other-message {
+    align-items: flex-start;
+}
+
+.other-message .message {
+    background: #fdfdfd;
+}
+
+.message {
+    padding: .8em;
+    background: white;
+    border: 1px solid lightgrey;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    min-width: 15vw;
+    max-width: 45vw;
+}
+
+.timestamp {
+    font-size: .8em;
+    color: grey;
+    margin: .4em .8em .4em .8em;
+}
+
+.username {
+    margin: 0 0 .4em 0;
+    font-weight: bold;
+    font-size: .9em;
+}

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { UserContext } from './UserContext'
 
-const Header = ({user}) => {
-
+const Header = () => {
+    const {user} = useContext(UserContext)
   return (
     <div>
-         {user && <p>{user.username}</p>}
+         <p>{user.username}</p>
     </div>
   )
 }
