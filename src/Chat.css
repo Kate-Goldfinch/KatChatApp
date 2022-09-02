@@ -1,16 +1,29 @@
-#side-nav {
-    flex-grow: 1;
+.chat-panel {
+    width: 70vw;
+    background-size: 20px 20px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
 }
 
-#messages {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    overflow-y: auto;
+#messages{
+    height:80vh;
+    overflow-y: scroll;
+}
+
+.conversation {
+    background: white;
+    border: none;
+    text-align: left;
+    padding-left: 2em;
+    border-bottom: .5px solid #E9ECEF;
+}
+
+.title {
+    margin: 0;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+    padding: .5em .5em .5em .7em;
+    font-weight: normal;
 }
 
 #message-input {
@@ -31,40 +44,11 @@
     font-size: 1em;
 }
 
-.conversation {
-    background: white;
-    border: none;
-    text-align: left;
-    padding-left: 2em;
-    border-bottom: .5px solid #E9ECEF;
-}
-
-.conversation:hover {
-    background: #212529;
-    color: white;
-}
-
-.main {
-    width: 70vw;
-    background-size: 20px 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.title {
-    margin: 0;
-    background-color: white;
-    border-bottom: 1px solid lightgrey;
-    padding: .5em .5em .5em .7em;
-    font-weight: normal;
-}
-
 .chat-button {
     border: 1px solid lightgrey;
     background: white;
     border-radius: 5px;
     margin: .5em;
-    padding: .4em 1em;
 }
 
 .chat-button:hover:enabled {

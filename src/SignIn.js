@@ -7,40 +7,54 @@ import apiService from './api/services'
 
 
 const SignIn = () => {
-    const [newUserName, setNewUserName] = useState('')
+    const [username, setUserName] = useState('')
+    const [password, setPassword] = useState('')
     const {setUser} = useContext(UserContext)
-    const handleUserNameChange = (e)=> setNewUserName(e.target.value)
+    const handleUserNameChange = (e)=> setUserName(e.target.value)
+    const handlePasswordChange = (e)=> setPassword(e.target.value)
 
-    const handleSignIn = (e)=>{
+    const handleNewUser = (e)=>{
+      e.preventDefault()
+      apiService
+      .createUser({
+        username,
+        password
+      })
+      .then(()=>handleSignIn(e))
+    }
+
+    const handleSignIn = async (e)=>{
         e.preventDefault()
-
-        let tempNewUser = {
-            username: 'kate1234',
-            token: '62f7740c6c017917269ca417'
+        try {
+          const user = await  apiService.login({
+            username, password
+          })
+          setUser(user)
+          setUserName('')
+          setPassword('')
+        } catch (exception) {
+          console.log('wrong password')
         }
-
-        // apiService
-        //   .signIn({
-      //   username: newUserName
-      // })
-        //   .then(response =>{
-        //     console.log(response)
-        //     if(response.status !== "username taken"){
-              // apiService.getUser(response.token)
-              // setUser(response)
-              apiService.getUser(tempNewUser.token)
-              setUser(tempNewUser)
-            // }
-            // })
       }  
 
+
+
   return (
-    <div>
-        <form onSubmit={handleSignIn}>
+    <div className='signin-form'>
+        <form onSubmit={handleNewUser}>
             <input 
-            value={newUserName}
+            value={username}
             onChange={handleUserNameChange}
             placeholder='Username'/>
+            <input 
+            value={password}
+            type = "password"
+            onChange={handlePasswordChange}
+            placeholder='Password'/>
+            <button type="submit">Create Account</button>
+        </form>
+
+        <form onSubmit={handleSignIn}>
             <button type="submit">Sign In</button>
         </form>
     </div>

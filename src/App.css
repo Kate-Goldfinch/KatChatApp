@@ -1,37 +1,33 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #a6192e;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  background-color: #A9C9FF;
+  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
 }
 
 .App-link {
   color: #61dafb;
 }
 
+.container{
+  display: flex;
+}
+
+.conv-panel{
+  flex-grow: 1;
+  width: 15%;
+
+}
+
+.conv-list{
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
 .conversation-card{
-  padding: 2em;
-  width: 10%;
-  height: 10%;
+  background-color: white;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -56,4 +52,20 @@
 .icon-text{
  margin:auto;
 z-index: 1;
+}
+
+.signin-form{
+  position: relative;
+  width: 420px;
+  height: 100px;
+  top: 50%;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  border-radius: 8px;
+  background-color: rgba(244, 255, 255, .5);
+  margin: auto;
+}
+
+.signin-form form{
+  position: relative;
+  top: 50%;
 }

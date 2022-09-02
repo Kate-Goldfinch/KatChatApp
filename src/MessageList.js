@@ -1,13 +1,28 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import MessageItem from './MessageItem'
 import apiService from './api/services'
 import './Chat.css'
 
 
-const MessageList = ({activeConversation, conversationContent, updateConversation}) => {
+const MessageList = ({activeConversation}) => {
+
+    const [conversationContent, setConversationContent] = useState([])
     const [newMessage, setNewMessage] = useState('')
 
-    if(!conversationContent) return null
+    useEffect(() => {
+        loadConversationContent();
+        const interval = setInterval(() => {
+            loadConversationContent();
+          }, 10000);
+          return () => clearInterval(interval);
+      }, [activeConversation])
+
+      const loadConversationContent = () =>{
+        apiService.getConversationDetails(activeConversation.id)
+            .then(response =>{
+                setConversationContent(response.messages) 
+            })
+      }
 
     const handleNewMessageChange = (e)=> setNewMessage(e.target.value)
 
@@ -16,7 +31,8 @@ const MessageList = ({activeConversation, conversationContent, updateConversatio
         apiService.submitMessage(activeConversation.id, {text: newMessage})
         .then(response =>{
             if(response.status === "success"){
-                updateConversation(activeConversation)
+                setNewMessage('')
+                loadConversationContent()
             }
         })
     }
@@ -24,29 +40,23 @@ const MessageList = ({activeConversation, conversationContent, updateConversatio
         apiService.deleteMessage(activeConversation.id, message)
         .then(response =>{
             if(response.status === "success"){
-                updateConversation(activeConversation)
+                loadConversationContent()
             }
         })
     }
 
-        const renderedList = conversationContent.map((message) => {
-            return <MessageItem 
-                    key={message.id} 
-                    message = {message}
-                    handleDeleteMessage = {handleDeleteMessage}
-                    />
-        })
+    const renderedList = conversationContent.map((message) => {
+        return <MessageItem 
+                key={message.id} 
+                message = {message}
+                conversationID = {activeConversation.id}
+                handleDeleteMessage = {handleDeleteMessage}
+                />
+    })
     
-    return <div className="container">
-                <div className="side">
-                    <p className="title">Conversations</p>
-                    {/* <div id="side-nav">
-                        <p id="loading-msg">Loading conversations...</p>
-                    </div> */}
-                </div>
-                <div id="chat-area" className="main">
-                    <div id="chat-nav">
-                        <p id="chat-title" className="title">{activeConversation.title}</p>
+    return <div className="chat-panel">
+                <div id="chat-nav">
+                    <p id="chat-title" className="title">{activeConversation.title}</p>
                         {/* <button id="invite-button" className="chat-button">
                             Invite Friend
                         </button>
@@ -72,7 +82,6 @@ const MessageList = ({activeConversation, conversationContent, updateConversatio
                         </button>
                     </form>
                 </div>
-            </div>
 }
 
 export default MessageList

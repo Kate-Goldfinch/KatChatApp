@@ -5,7 +5,7 @@ const Header = () => {
     const {user} = useContext(UserContext)
   return (
     <div>
-         <p>{user.username}</p>
+         <div>{user.username}</div>
     </div>
   )
 }

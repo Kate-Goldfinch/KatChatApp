@@ -1,23 +1,26 @@
 const mongoose = require('mongoose')
 const config = require('../config')
 
-const sessionSchema = new mongoose.Schema({
-    username: {type: String, unique: true}
+const userSchema = new mongoose.Schema({
+    username: {type: String, unique: true},
+    passwordHash : String,
+    friends : [{type: mongoose.Types.ObjectId, ref: 'User'}]
   })
 
-sessionSchema.set('toJSON', {
+userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = document._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
+    delete returnedObject.passwordHash
   }
 })
 
-const Session = mongoose.model('Session', sessionSchema)
+const User = mongoose.model('User', userSchema)
 
 const conversationSchema = new mongoose.Schema({
     title: String,
-    creator: {type: mongoose.Types.ObjectId, ref: 'Session'}
+    creator: {type: mongoose.Types.ObjectId, ref: 'User'},
   },
   {
     toJSON: {virtuals: true},
@@ -44,7 +47,7 @@ const Conversation = mongoose.model('Conversation', conversationSchema)
 const messageSchema = new mongoose.Schema({
     text: String,
     timestamp: {type: Date, default: Date.now},
-    creator: {type: mongoose.Types.ObjectId, ref: 'Session'},
+    creator: {type: mongoose.Types.ObjectId, ref: 'User'},
     conversation: {type: mongoose.Types.ObjectId, ref: 'Conversation'}
   })
 
@@ -61,8 +64,30 @@ messageSchema.set('toJSON', {
   }
 })
 
-
 const Message = mongoose.model('Message', messageSchema)
+
+const reactionSchema = new mongoose.Schema({
+  reactions: String,
+  timestamp: {type: Date, default: Date.now},
+  creator: {type: mongoose.Types.ObjectId, ref: 'User'},
+  conversation: {type: mongoose.Types.ObjectId, ref: 'Conversation'},
+  message: {type: mongoose.Types.ObjectId, ref: 'Message'}
+})
+
+reactionSchema.set('toJSON', {
+transform: (document, returnedObject) => {
+  returnedObject.id = document._id.toString()
+
+  if (document.creator) {
+    returnedObject.creator = document.creator.username
+  }
+
+  delete returnedObject._id
+  delete returnedObject.__v
+}
+})
+
+const Reaction = mongoose.model('Reaction', reactionSchema)
 
 const initDB = async () => {
     await mongoose
@@ -72,4 +97,4 @@ const initDB = async () => {
         })
     }
 
-module.exports = { Session, Conversation, Message, initDB }
+module.exports = {User, Conversation, Message, Reaction, initDB }

@@ -1,5 +1,6 @@
 const express = require('express')
 const auth = require('./controllers/auth')
+const friends = require('./controllers/friends')
 const conv = require('./controllers/conversations')
 const messages = require('./controllers/messages')
 
@@ -9,9 +10,17 @@ router.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
-router.post('/auth/register', auth.createSession)
+router.post('/auth/register', auth.createUser)
 
-router.get('/auth/', auth.getUser)
+// router.get('/auth/', auth.getUser)
+
+router.post('/auth/', auth.login)
+
+/* GET conversations returns a list of all current conservations */
+router.post('/api/friends', friends.addFriend)
+
+/* GET conversations returns a list of all current conservations */
+router.get('/api/friends', friends.getFriends)
 
 /* GET conversations returns a list of all current conservations */
 router.get('/api/conversations', conv.getConversations)
@@ -27,6 +36,9 @@ router.post('/api/conversations/:id', messages.createMessage)
 
 /* GET a message URL to get details of a message */
 router.get('/api/conversations/:id/:msgid', messages.getMessage)
+
+// /* UPDATE the content of a message*/
+// router.put('/api/conversations/:id/:msgid', messages.updateLikes)
 
 /* DELETE to message URL to delete the message */
 router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)

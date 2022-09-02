@@ -1,7 +1,8 @@
 import React,{useContext} from 'react'
+import apiService from './api/services'
 import { UserContext } from './UserContext'
 
-const MessageItem = ({message, handleDeleteMessage}) => {
+const MessageItem = ({message, conversationID, handleDeleteMessage}) => {
     const {user} = useContext(UserContext)
 
  
@@ -18,9 +19,11 @@ const MessageItem = ({message, handleDeleteMessage}) => {
         </div>
         } else{
             return  <div className = 'other-message'
+                        onClick = {()=> apiService.updateMessage(conversationID, message.id, 1)}
                         key={message.id}>
                         <div className='username'>{message.creator}</div>
                         <div className = 'message'>{message.text}</div>
+                        {/* <div>{message.likes} </div> */}
                         <div className = 'timestamp'>{newDate}</div>
                     </div>
             }

@@ -4,7 +4,9 @@ import ConversationItem from './ConversationItem'
 import apiService from './api/services'
 
 const ConversationList = ({conversations, onConversationSelect, updateConversationList}) => {
+
     const [newConversation, setNewConversation] = useState('')
+    
     const handleNewConversationChange = (e)=> setNewConversation(e.target.value)
     const handleSubmitConversation = (e)=>{
         e.preventDefault()
@@ -27,7 +29,7 @@ const ConversationList = ({conversations, onConversationSelect, updateConversati
     })
 
     return (
-    <div>
+    <div className='conv-panel'>
         <div className = 'conv-list'>{renderedList}</div>
         
         <form id="message-input"
