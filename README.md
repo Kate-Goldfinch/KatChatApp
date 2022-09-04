@@ -1,6 +1,6 @@
 # A Real-Time Chat Service
 
-Kate Goldfinch
+Developed by Kate Goldfinch for COMP3120
 
 ## Base Functionality
 
