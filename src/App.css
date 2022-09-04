@@ -5,17 +5,70 @@
   background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
 }
 
-.App-link {
-  color: #61dafb;
+.splash-title{
+  color: white;
+  font-size: 108px;
+  position: relative;
+  top: 200px;
+}
+
+
+.signin-form{
+  position: relative;
+  width: 420px;
+  height: 140px;
+  top: 30%;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  border-radius: 8px;
+  background-color: rgba(244, 255, 255, .5);
+  margin: auto;
+}
+
+.signin-form form{
+  position: relative;
+  top: 30%;
+}
+
+
+.error-msg{
+  color:red
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 10vh;
+  padding: 0 2em;
+}
+
+.header-title{
+  color: white;
+  font-size: 36px;
+position: relative;
+left:0
 }
 
 .container{
-  display: flex;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 20% 70% 10%;
+}
+
+.friends-list{
+  background-color: white;
+}
+
+.search-form{
+  display:flex;
+  flex-direction: column;
 }
 
 .conv-panel{
-  flex-grow: 1;
-  width: 15%;
+ display:flex;
+flex-direction: column;
+border-right: 1px solid black;
 
 }
 
@@ -54,18 +107,22 @@
 z-index: 1;
 }
 
-.signin-form{
-  position: relative;
-  width: 420px;
-  height: 100px;
-  top: 50%;
-  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
-  border-radius: 8px;
-  background-color: rgba(244, 255, 255, .5);
-  margin: auto;
+.item{
+ width: 120px;
+ background-color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }
 
-.signin-form form{
-  position: relative;
-  top: 50%;
+.add-user-btn{
+  height: 20px;
+  margin: 0 0 0 1em;
+}
+
+.delete-user-btn{
+  height: 20px;
+  color: white;
+  background-color: red;
+  margin: 0 0 0 1em;
 }

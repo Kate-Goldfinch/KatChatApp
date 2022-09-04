@@ -4,7 +4,9 @@ const config = require('../config')
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
     passwordHash : String,
-    friends : [{type: mongoose.Types.ObjectId, ref: 'User'}]
+    friends :[{
+      userID: {type: mongoose.Types.ObjectId, ref: 'User'}, 
+      username: String}]
   })
 
 userSchema.set('toJSON', {
@@ -21,6 +23,9 @@ const User = mongoose.model('User', userSchema)
 const conversationSchema = new mongoose.Schema({
     title: String,
     creator: {type: mongoose.Types.ObjectId, ref: 'User'},
+    participants : [{
+      userID: {type: mongoose.Types.ObjectId, ref: 'User'}, 
+      username: String}]
   },
   {
     toJSON: {virtuals: true},
@@ -66,29 +71,6 @@ messageSchema.set('toJSON', {
 
 const Message = mongoose.model('Message', messageSchema)
 
-const reactionSchema = new mongoose.Schema({
-  reactions: String,
-  timestamp: {type: Date, default: Date.now},
-  creator: {type: mongoose.Types.ObjectId, ref: 'User'},
-  conversation: {type: mongoose.Types.ObjectId, ref: 'Conversation'},
-  message: {type: mongoose.Types.ObjectId, ref: 'Message'}
-})
-
-reactionSchema.set('toJSON', {
-transform: (document, returnedObject) => {
-  returnedObject.id = document._id.toString()
-
-  if (document.creator) {
-    returnedObject.creator = document.creator.username
-  }
-
-  delete returnedObject._id
-  delete returnedObject.__v
-}
-})
-
-const Reaction = mongoose.model('Reaction', reactionSchema)
-
 const initDB = async () => {
     await mongoose
         .connect(config.mongoDBUrl)
@@ -97,4 +79,4 @@ const initDB = async () => {
         })
     }
 
-module.exports = {User, Conversation, Message, Reaction, initDB }
+module.exports = {User, Conversation, Message, initDB }

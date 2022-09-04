@@ -1,13 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
 .chat-panel {
+    display:flex;
+    flex-direction: column;
     width: 70vw;
     background-size: 20px 20px;
-    display: flex;
-    flex-direction: column;
 }
 
 #messages{
-    height:80vh;
+    height: 80%;
     overflow-y: scroll;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .conversation {
@@ -22,17 +27,16 @@
     margin: 0;
     background-color: white;
     border-bottom: 1px solid lightgrey;
-    padding: .5em .5em .5em .7em;
-    font-weight: normal;
+    padding: 0 .5em;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #message-input {
-    background: white;
-    min-height: 10vh;
-    border-top: 1px solid lightgrey;
     display: flex;
-    padding: 1em;
+    padding: 0 1em;
     align-items: stretch;
+    margin: 0.5em;
 }
 
 #message-input textarea {
@@ -49,6 +53,7 @@
     background: white;
     border-radius: 5px;
     margin: .5em;
+    height: 40px;
 }
 
 .chat-button:hover:enabled {

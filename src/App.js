@@ -1,49 +1,50 @@
-import {useState,useEffect} from 'react'
-import Header from './Header';
-import apiService from './api/services'
-import ConversationList from './ConversationList';
-import MessageList from './MessageList';
-import './App.css';
-import { UserContext } from './UserContext';
-import SignIn from './SignIn';
-
+import { useState } from "react";
+import Header from "./Header";
+import ConversationList from "./ConversationList";
+import MessageList from "./MessageList";
+import FriendsList from "./FriendsList";
+import SignIn from "./SignIn";
+import "./App.css";
+import { UserContext } from "./UserContext";
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [activeConversation, setActiveConversation] = useState(null);
 
-  const [user, setUser] = useState(null)
-  const [conversations, setConversations] = useState([])
-  const [activeConversation, setActiveConversation] = useState(null)
-
-useEffect(() => {
-  user && apiService.getConversations(user)
-            .then(response =>{
-              console.log(response)
-              setConversations(response.conversations)
-            })
-}, [user])
-
-const handleSelectConversation = (conversation) => setActiveConversation(conversation)
-  
+  const handleSelectConversation = (conversation) =>
+    setActiveConversation(conversation);
 
   return (
     <div className="App">
-      <UserContext.Provider value={{user, setUser}}>
-        {user ? <Header/> : <SignIn/>}
+      <UserContext.Provider value={{ user, setUser }}>
+        {user ? (
+          <Header setActiveConversation={setActiveConversation} />
+        ) : (
+          <SignIn />
+        )}
         <div className="container">
-          {user && 
-          <ConversationList 
-              conversations={conversations}
-              onConversationSelect = {(conv)=> {handleSelectConversation(conv)}}
-              updateConversationList = {(conv)=> {setConversations(conv)}}
-          />}
+          {user && (
+            <ConversationList
+              user={user}
+              onConversationSelect={(conv) => {
+                handleSelectConversation(conv);
+              }}
+            />
+          )}
 
-          {activeConversation && <MessageList 
-            activeConversation = {activeConversation}
-            updateConversation = {(conv)=> {handleSelectConversation(conv)}}
-          />}
+          {user && activeConversation ? (
+            <MessageList
+              activeConversation={activeConversation}
+              updateConversation={(conv) => {
+                handleSelectConversation(conv);
+              }}
+            />
+          ) : (
+            <div></div>
+          )}
+          {user && <FriendsList />}
         </div>
       </UserContext.Provider>
-
     </div>
   );
 }

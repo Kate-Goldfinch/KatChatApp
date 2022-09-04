@@ -1,43 +1,20 @@
 # A Real-Time Chat Service
 
-This repository is the starter kit for the COMP3120 Individual Project
-for 2022: a real time chat service.  The back-end implementation is
-in the `server` subdirectory.  The front-end project is homed in the
-main directory (with sources in `src`).  
+Kate Goldfinch
 
-Note that you can make any changes you deem necessary to this code including
-fixing bugs and adding features.  That includes changing this file which should document
-your personal project.
+## Base Functionality
 
-## Configuration
+- The landing page will allow users register with the chat service or, if already registered, will show the list of conversations
+- The conversation view will show the list of messages, most recent first, and a text box to allow posting messages
+- Messages are updated regularly - your app pulls the updated message list at a set interval when showing a conversation so that replies can be seen.
+- Users can delete their own messages
+- Users can navigate between conversations
+- Users can create a new conversation
 
-Copy the file `.env.dist` to `.env` and edit the file with your own
-settings - in particular your MongoDB settings if you are doing server
-side development.  Note that these settings are only relevant to the
-server implementation, not the front-end.
+## Extended Functionality
 
-## Frontend Project
-
-The `src` folder contains a template front-end React project to get you
-started.
-
-To run the front-end development server:
-
-```bash
-npm run start
-```
-
-This will run the server on port 3000.
-
-You can run the front-end tests as usual with:
-
-```bash
-npm run test
-```
-
-Which will run any tests you have added to the front-end project under `src`.  Currently it
-runs one dummy test.
-
-## Backend Server
-
-The backend server is documented in [Backend Server](doc/backend.md). 
+- Account creation now requires a username and password, which is hashed using bcrypt and saved on the database.
+- On sucessful login, the user recieves a JSON Web Token to authenticate their session.
+- Friends - Users can add other users as friends, as well as remove them from friends list. Adding a friend will reciprocally add the user to the other users friends group.
+- User search - Search for a user from a list of valid users to add as a friend based on partial name entry using regex
+- Conversation participants - Changed the focus of the app from a reddit style forum with all conversations visible to something more like Facebook messenger, with users only able to see conversations they are a participant of. Updated implemention of the conversations so that only friends can be added as participants to conversations.
