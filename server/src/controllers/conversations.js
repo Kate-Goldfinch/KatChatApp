@@ -3,7 +3,7 @@ const models = require("../models");
 
 const createConversation = async (request, response) => {
   const creator = await auth.validUser(request);
-  const user = await models.User.findOne({ creator });
+  const user = await models.User.findOne({ "_id": creator });
 
   if (creator) {
     const title = request.body.title;
