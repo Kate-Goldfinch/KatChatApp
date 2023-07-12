@@ -38,7 +38,7 @@ const SignIn = () => {
       setUserName("");
       setPassword("");
     } catch (exception) {
-      console.log("wrong password");
+      console.log("wrong password", exception);
       setErrorMessage("Username or password incorrect")
     }
   }
@@ -47,25 +47,26 @@ const SignIn = () => {
     <>
       <div className="splash-title">Kat Chat</div>
       <div className="signin-form">
-        <form onSubmit={handleNewUser}>
-          <input
+        <input
             value={username}
             onChange={handleUserNameChange}
             placeholder="Username"
-          />
-          <input
+        />
+        <input
             value={password}
             type="password"
             onChange={handlePasswordChange}
             placeholder="Password"
           />
           <div className = 'error-msg'>{errorMessage}</div>
-          <button type="submit">Create Account</button>
-        </form>
-
-        <form onSubmit={handleSignIn}>
-          <button type="submit">Sign In</button>
-        </form>
+          <div className="btn-container">
+            <form onSubmit={handleNewUser}>
+              <button type="submit">Create Account</button>
+            </form>
+            <form onSubmit={handleSignIn}>
+              <button type="submit">Sign In</button>
+            </form>
+          </div>
       </div>
     </>
   );

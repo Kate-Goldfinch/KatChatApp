@@ -17,21 +17,79 @@
   position: relative;
   width: 420px;
   height: 140px;
-  top: 30%;
+  top: 25%;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   border-radius: 8px;
   background-color: rgba(244, 255, 255, .5);
   margin: auto;
 }
 
-.signin-form form{
+.signin-form input{
   position: relative;
   top: 30%;
+  height:25px;
+  justify-items: center;
+  border-radius: 8px;
+  border: #A9C9FF;
+  margin-inline: 5px;
+  padding-left: 10px;
+  font-size: 0.9rem;
 }
 
+.btn-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  top: 25%;
+}
+
+.signin-form button{
+  align-items: center;
+  background-color: #91b9ff;
+  border: 0;
+  width: 120px;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 50px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.signin-form button:hover,
+.signin-form button:focus { 
+  background-color: #5694ff;
+  color: #ffffff;
+}
+
+.signin-form button:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
 
 .error-msg{
-  color:red
+  color:red;
+  height: 20px;
+  position: relative;
+  top: -10%;
 }
 
 .header{
@@ -45,7 +103,8 @@
 
 .header-title{
   color: white;
-  font-size: 36px;
+  font-weight: 700;
+  font-size: 48px;
 position: relative;
 left:0
 }
@@ -68,8 +127,6 @@ left:0
 .conv-panel{
  display:flex;
 flex-direction: column;
-border-right: 1px solid black;
-
 }
 
 .conv-list{
@@ -85,7 +142,7 @@ border-right: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid black
+  border: 1px  rgba(0, 0, 0, 0.3) solid
 }
 
 .icon-box{
@@ -122,7 +179,9 @@ z-index: 1;
 
 .delete-user-btn{
   height: 20px;
-  color: white;
-  background-color: red;
+  color: black;
+  background-color: rgb(255, 241, 253);
+  border:2px  rgba(0, 0, 0, 0.3) solid;
+  border-radius: 8ch;
   margin: 0 0 0 1em;
 }

@@ -1,10 +1,11 @@
 import axios from "axios";
 
 // const baseURL = 'https://comp3120-chat.herokuapp.com/'
-const baseURL = "/";
+const baseURL = "http://localhost:3001/"
 
 const createUser = (user) => {
   const request = axios.post(baseURL + "auth/register", user);
+  console.log('test')
   return request.then((response) => response.data);
 };
 

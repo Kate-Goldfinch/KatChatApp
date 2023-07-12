@@ -22,28 +22,27 @@ function App() {
         ) : (
           <SignIn />
         )}
-        <div className="container">
+        
           {user && (
+            <div className="container">
             <ConversationList
               user={user}
               onConversationSelect={(conv) => {
                 handleSelectConversation(conv);
               }}
             />
-          )}
 
-          {user && activeConversation ? (
+          {activeConversation ? (
             <MessageList
               activeConversation={activeConversation}
               updateConversation={(conv) => {
                 handleSelectConversation(conv);
               }}
             />
-          ) : (
-            <div></div>
+          ) : <div></div>}
+          <FriendsList />
+          </div>
           )}
-          {user && <FriendsList />}
-        </div>
       </UserContext.Provider>
     </div>
   );

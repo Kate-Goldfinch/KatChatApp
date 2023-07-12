@@ -5,7 +5,7 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 const corsClientDomain =  process.env.CORS_CLIENT_DOMAIN
-const mongoDBUrl = process.env.MONGODB_URL
+const mongoDBUrl = 'mongodb+srv://kategold:2b2RA2qq21uzg6rQ@cluster0.e10zsiu.mongodb.net/chatapp?retryWrites=true&w=majority'
 const sessionSecret =  process.env.SESSION_DB_SECRET || 'notVerySecretSecret'
 
 const port = process.env.PORT || '8000'

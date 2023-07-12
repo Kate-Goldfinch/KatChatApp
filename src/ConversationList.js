@@ -52,7 +52,7 @@ const ConversationList = ({ user, onConversationSelect }) => {
           onChange={handleNewConversationChange}
         ></textarea>
         <button id="submitMessage" className="chat-button" type="submit">
-          <h3>Submit</h3>
+          <h3>Create</h3>
         </button>
       </form>
     </div>
