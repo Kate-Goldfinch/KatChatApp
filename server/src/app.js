@@ -19,9 +19,6 @@ function errorNotification (err, str, req) {
   }
 
 const app = express()
-app.use(morgan('dev'))
-app.use(express.json())
-app.use(express.static('build'))
 app.use(function(req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
   const allowedOrigins = ['http://localhost:3000', 'http://katchatapp.onrender.com', 'https://katchatapp.onrender.com'];
@@ -34,6 +31,10 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
   next();
 });
+app.use(morgan('dev'))
+app.use(express.json())
+app.use(express.static('build'))
+
 if (process.env.NODE_ENV === 'development') {
     // only use in development
     app.use(errorhandler({ log: errorNotification }))
