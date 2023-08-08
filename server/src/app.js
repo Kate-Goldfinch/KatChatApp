@@ -27,7 +27,9 @@ app.use(cors({
   credentials: true,
   origin: "https://katchatapp.onrender.com"
 }))
-app.options('*', cors())
+app.options('/*', (_, res) => {
+  res.sendStatus(200);
+});
 if (process.env.NODE_ENV === 'development') {
     // only use in development
     app.use(errorhandler({ log: errorNotification }))
