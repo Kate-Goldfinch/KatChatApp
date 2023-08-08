@@ -45,8 +45,7 @@
     "test-server": "cross-env NODE_ENV=test jest --verbose --runInBand server/"
   },
 "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "http://localhost:3001"
+    "proxy": "https://katchatapp.onrender.com"
 },
   "eslintConfig": {
     "extends": [
