@@ -25,7 +25,9 @@ app.use(express.json())
 app.use(express.static('build'))
 app.use(cors({
   credentials: true,
-  origin: "https://katchatapp.onrender.com"
+  origin: "https://katchatapp.onrender.com",
+  preflightContinue: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
 }))
 app.options('/*', (_, res) => {
   res.sendStatus(200);
