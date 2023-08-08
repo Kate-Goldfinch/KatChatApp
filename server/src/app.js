@@ -23,14 +23,16 @@ const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.static('build'))
+app.options('*', cors()); 
+app.options('/*', (_, res) => {
+  res.sendStatus(200);
+});
 app.use(cors({
   credentials: true,
   origin: "*",
   preflightContinue: true,
 }))
-app.options('/*', (_, res) => {
-  res.sendStatus(200);
-});
+
 if (process.env.NODE_ENV === 'development') {
     // only use in development
     app.use(errorhandler({ log: errorNotification }))
