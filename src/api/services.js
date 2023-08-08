@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const baseURL = 'https://comp3120-chat.herokuapp.com/'
-const baseURL = "http://localhost:3001/"
+const baseURL = "https://katchatapp.onrender.com/"
 
 const createUser = (user) => {
   const request = axios.post(baseURL + "auth/register", user);
