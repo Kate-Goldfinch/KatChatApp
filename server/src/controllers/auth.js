@@ -44,6 +44,7 @@ const login = async (request, response) => {
     id: user._id,
   };
 
+  console.log(userForToken, process.env.PORT)
   const token = jwt.sign(userForToken, process.env.SESSION_DB_SECRET);
 
   response.status(200).send({ token, username: user.username });

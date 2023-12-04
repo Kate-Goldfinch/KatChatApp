@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const baseURL = 'https://comp3120-chat.herokuapp.com/'
+// const baseURL = 'http://localhost:8000/'
 const baseURL = "https://katchatapp-api.onrender.com/"
 
 const createUser = (user) => {
